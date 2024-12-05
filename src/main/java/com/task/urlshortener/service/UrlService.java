@@ -14,7 +14,6 @@ public class UrlService {
 
     private final UrlRepository urlRepository;
 
-//    @Autowired
     public UrlService(UrlRepository urlRepository) {
         this.urlRepository = urlRepository;
     }
@@ -51,6 +50,13 @@ public class UrlService {
         urlRepository.save(url);
 
         return url.getOriginalUrl();
+    }
+
+    public int getShortUrlClickCount(String shortCode) {
+        Url url = urlRepository.findByShortCode(shortCode)
+                .orElseThrow(() -> new IllegalArgumentException("Short URL not found"));
+
+        return url.getClickCount();
     }
 
     private String generateShortCode() {

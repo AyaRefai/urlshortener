@@ -29,4 +29,11 @@ public class UrlController {
         return ResponseEntity.ok(originalUrl);
     }
 
+    @GetMapping("/{shortCode}/count")
+    public ResponseEntity<Integer> getShortUrlClickCount(@PathVariable("shortCode") String shortCode) {
+        int clickCount = urlService.getShortUrlClickCount( shortCode );
+        return ResponseEntity.ok(clickCount);
+    }
+
+
 }
